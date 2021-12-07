@@ -11,7 +11,8 @@
 #!/usr/bin/env bash
 set -x
 /usr/bin/yum update -y
-#curl -O https://raw.githubusercontent.com/shaikis/terraform-aws-OpenVpn/userdata.sh
+curl -O https://raw.githubusercontent.com/shaikis/terraform-aws-OpenVpn/userdata.sh.tpl
+mv userdata.sh.tpl userdata.sh
 chmod +x userdata.sh
 export AUTO_INSTALL=y
 ./userdata.sh

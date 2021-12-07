@@ -62,7 +62,7 @@ resource "aws_iam_role_policy" "ssm_policy" {
           "kms:GenerateDataKey"
         ]
         Effect   = "Allow"
-        Resource = "${aws_key_pair.openvpn_key_pair.arn}"
+        Resource = "${var.keypair_arn}"
       },
     ]
   })
