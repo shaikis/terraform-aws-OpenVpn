@@ -1,11 +1,11 @@
 resource "aws_security_group" "openvpn" {
-  name        = "openvpn"
+  name        = var.sg_name
   description = "Allow inbound UDP access to OpenVPN and unrestricted egress"
 
   vpc_id = var.vpc_id
 
   tags = {
-    Name        = var.tag_name
+    Name        = "${var.sg_name}_sg"
     Provisioner = "Terraform"
   }
 
