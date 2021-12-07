@@ -1,9 +1,9 @@
-data "aws_ami" "amazon_linux_2" {
+data "aws_ami" "aws_ami_id" {
   most_recent = true
 
   filter {
     name   = "name"
-    values = ["amzn2-ami-hvm*"]
+    values = [var.image_type_name] #"amzn2-ami-hvm*"
   }
 
   filter {
@@ -13,7 +13,7 @@ data "aws_ami" "amazon_linux_2" {
 
   filter {
     name   = "block-device-mapping.volume-type"
-    values = ["gp2"]
+    values = [var.ebs_vol_type]
   }
 
   filter {
@@ -27,15 +27,17 @@ data "aws_ami" "amazon_linux_2" {
 
 
 resource "aws_instance" "openvpn" {
-  ami                         = "ami-0d2f82a622136a696" //us-west-2
-  instance_type               = "t2.micro"
-  vpc_security_group_ids      = aws_security_group.vpn.id
+  ami                         = data.aws_ami.aws_ami_id.id//us-west-2
+  instance_type               = var.ec2_instance_type
+  vpc_security_group_ids      = aws_security_group.openvpn.id
   associate_public_ip_address = true
-  subnet_id                   = "${aws_subnet.PubSubnet2a.id}"
-  iam_instance_profile        = "${aws_iam_instance_profile.aws-vpn-profile.name}"
+  subnet_id                   = var.pub_subnet_id
+  iam_instance_profile        = aws_iam_instance_profile.ssm_profile.name
   user_data                   = "${data.template_file.vpn.rendered}"
+  
   tags = {
-    Name = "${var.env_prefix_name}-vpn"
+    Name        = "${var.env_prefix_name}-openvpn"
+    provisioner = "terraform"
   }
 }
 

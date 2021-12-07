@@ -12,6 +12,6 @@
 set -x
 /usr/bin/yum update -y
 curl -O https://raw.githubusercontent.com/angristan/openvpn-install/master/openvpn-install.sh
-chmod +x openvpn-install.sh
+chmod +x userdata.sh
 export AUTO_INSTALL=y
-./openvpn-install.sh
+./userdata.sh
