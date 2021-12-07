@@ -3,7 +3,7 @@ data "aws_ami" "aws_ami_id" {
 
   filter {
     name   = "name"
-    values = [var.image_type_name] #"amzn2-ami-hvm*"
+    values = [var.image_type_name] #
   }
 
   filter {
@@ -27,7 +27,7 @@ data "aws_ami" "aws_ami_id" {
 
 
 resource "aws_instance" "openvpn" {
-  ami                         = data.aws_ami.aws_ami_id.id//us-west-2
+  ami                         = data.aws_ami.aws_ami_id.id //us-west-2
   instance_type               = var.ec2_instance_type
   vpc_security_group_ids      = aws_security_group.openvpn.id
   associate_public_ip_address = true
