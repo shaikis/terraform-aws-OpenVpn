@@ -42,7 +42,7 @@ resource "aws_instance" "openvpn" {
 }
 
 data "template_file" "vpn" {
-  template = "${file("bootstrap.sh")}"
+  template = "${file("${path.module}/bootstrap.sh")}"
 
   vars = {
     region_name              = var.region
