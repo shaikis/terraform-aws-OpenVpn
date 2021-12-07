@@ -2,7 +2,7 @@ resource "aws_security_group" "openvpn" {
   name        = "openvpn"
   description = "Allow inbound UDP access to OpenVPN and unrestricted egress"
 
-  vpc_id = aws_vpc.openvpn.id
+  vpc_id = var.vpc_id
 
   tags = {
     Name        = var.tag_name
