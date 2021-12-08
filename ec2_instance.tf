@@ -34,6 +34,7 @@ resource "aws_instance" "openvpn" {
   subnet_id                   = var.pub_subnet_id
   iam_instance_profile        = aws_iam_instance_profile.ssm_profile.name
   user_data                   = "${data.template_file.vpn.rendered}"
+  key_name                    = var.keypair_name
   
   tags = {
     Name        = "${var.env_prefix_name}-openvpn"
