@@ -29,7 +29,7 @@ data "aws_ami" "aws_ami_id" {
 resource "aws_instance" "openvpn" {
   ami                         = data.aws_ami.aws_ami_id.id //us-west-2
   instance_type               = var.ec2_instance_type
-  vpc_security_group_ids      = aws_security_group.openvpn.id
+  vpc_security_group_ids      = [aws_security_group.openvpn.id]
   associate_public_ip_address = true
   subnet_id                   = var.pub_subnet_id
   iam_instance_profile        = aws_iam_instance_profile.ssm_profile.name
