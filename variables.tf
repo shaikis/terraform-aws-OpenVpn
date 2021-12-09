@@ -7,3 +7,4 @@ variable "region" {}
 variable "vpc_id" {}
 variable "sg_name" {}
 variable "keypair_arn" {}
+variable "key_name" {}
